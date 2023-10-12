@@ -1,0 +1,39 @@
+{
+  "name": "afinco2",
+  "version": "2.0.0",
+  "description": "Assistente Financeiro-Contábil",
+  "scripts": {
+    "start:dev": "npm run start:dev -w @afinco2/api",
+    "start:prod": "npm run start:prod -w @afinco2/api",
+    "build": "npm run build -w @afinco2/core && npm run build -w @afinco2/api",
+    "format": "prettier --write",
+    "lint:staged": "lint-staged",
+    "prepare": "husky install && npm run build -w @afinco2/core"
+  },
+  "keywords": [],
+  "author": "André Martins <fmartins.andre@gmail.com>",
+  "license": "ISC",
+  "workspaces": [
+    "packages/core",
+    "apps/api"
+  ],
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "lint-staged": {
+    "*.{json,css}": [
+      "npm run format"
+    ],
+    "packages/core/**/*.{js,ts}": [
+      "npm run format -w @afinco2/core",
+      "npm run lint -w @afinco2/core"
+    ],
+    "apps/api/**/*.{js,ts}": [
+      "npm run format -w @afinco2/api",
+      "npm run lint -w @afinco2/api"
+    ]
+  }
+}
